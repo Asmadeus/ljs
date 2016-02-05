@@ -15,8 +15,7 @@
   overflow: hidden;
 }
 
-.calculator .top .clear,
-.calculator .keys .btn {
+.calculator .btn {
   float: left;
   position: relative;
   width: 66px;
@@ -48,6 +47,10 @@
   border-radius: 3px;
   background-color: rgba(0, 0, 0, 0.2);
   float: right;
+  color: white;
+  line-height: 40px;
+  text-align: right;
+  padding: 0 10px;
 }
 
 .calculator .keys .btn.operator {
