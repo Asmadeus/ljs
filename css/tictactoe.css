@@ -1,0 +1,25 @@
+.status {
+  font: 21px/21px "Chewy", Arial, sans-serif;
+  color: rgba(0, 0, 0, 0.7);
+}
+.tictactoe-wrapper {
+  width: 300px;
+  overflow: hidden;
+}
+.tictactoe-wrapper .cell {
+  width: 100px;
+  height: 100px;
+  float: left;
+  border-bottom: 3px solid black;
+  border-right: 3px solid black;
+  text-align: center;
+  font: 68px/100px "Chewy", Arial, sans-serif;
+  color: rgba(0, 0, 0, 0.7);
+  cursor: pointer;
+}
+.tictactoe-wrapper .cell:nth-child(3n) {
+  border-right: 0;
+}
+.tictactoe-wrapper .cell:nth-last-child(-n+3) {
+  border-bottom: 0;
+}
