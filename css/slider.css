@@ -1,15 +1,2 @@
-.slider-wrapper {
-  width: 450px;
-  height: 300px;
-  overflow: hidden;
-  position: relative;
-}
-.slider-wrapper .slides {
-  height: 300px;
-}
-.slider-wrapper .slides img{
-  float: left;
-  display: inline-block;
-  height: 100%;
-
-}
+.slider-wrapper{width:450px;height:300px;overflow:hidden;position:relative}.slider-wrapper .slides{height:300px}.slider-wrapper .slides img{float:left;display:inline-block;height:100%}
+/*# sourceMappingURL=slider.css.map */

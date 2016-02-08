@@ -1,24 +1,2 @@
-@import url(https://fonts.googleapis.com/css?family=Chewy);
-
-* {
-  box-sizing: border-box;
-}
-
-html {
-	height: 100%;
-	background: radial-gradient(circle, #fff 20%, #ccc);
-	background-size: cover;
-}
-
-h1 {
-  font: 68px/68px "Chewy", Arial, sans-serif;
-  color: #2C9090;
-}
-
-.block-center {
-  margin: 0 auto;
-}
-
-.text-center {
-  text-align: center;
-}
+@import url(https://fonts.googleapis.com/css?family=Chewy);*{box-sizing:border-box}html{height:100%;background:radial-gradient(circle, #fff 20%, #ccc);background-size:cover}h1{font:68px/68px "Chewy", Arial, sans-serif;color:#2C9090}.block-center{margin:0 auto}.text-center{text-align:center}
+/*# sourceMappingURL=style.css.map */
