@@ -1,78 +1,116 @@
-var cells = document.getElementsByClassName("cell");
-var turnTic = true;
-var statusText = document.getElementsByClassName("status")[0];
-var firstTurn = true;
-statusText.innerHTML = "Ход крестиков(X)";
+$(document).ready(function() {
 
-for (var i = 0; i < cells.length; i++) {
-  cells[i].onclick = function(e) {
-    var cell = this;
-    var cellValue = this.innerHTML;
-    if(cellValue === "") {
-      if(turnTic) {
-        cell.innerHTML = "X";
-        statusText.innerHTML = "Ход ноликов(0)";
-      }
-      else {
-        cell.innerHTML = "0";
-        statusText.innerHTML = "Ход крестиков(X)";
-      }
-      if(!firstTurn && checkFinish()) clearBoard();
-      if(firstTurn) firstTurn = false;
-      turnTic = !turnTic;
+  var Game = function() {
+
+    this.currentPlayer = "X";
+    this.playerMarker1 = "X";    
+    this.playerMarker2 = "0";
+    this.cells = $(".cell");
+    this.status = $(".status");
+    $(this.status).text("Turn X");
+    this.stop = false;
+
+    this.selectCell = function(cell) {
+      if($(cell).text() !== "" || this.stop) return false;
+      this.playerMove(cell);
     }
-  }
-}
 
-function checkFinish() {
-  if(cells[0].innerHTML !== "" && cells[0].innerHTML === cells[1].innerHTML && cells[1].innerHTML === cells[2].innerHTML) {
-    showWinner(cells[0].innerHTML);
-    return true;
-  }
-  else if (cells[3].innerHTML !== "" && cells[3].innerHTML === cells[4].innerHTML && cells[4].innerHTML === cells[5].innerHTML) {
-    showWinner(cells[3].innerHTML);
-    return true;
-  }
-  else if (cells[6].innerHTML !== "" && cells[6].innerHTML === cells[7].innerHTML && cells[7].innerHTML === cells[8].innerHTML) {
-    showWinner(cells[6].innerHTML);
-    return true;
-  }
-  else if (cells[0].innerHTML !== "" && cells[0].innerHTML === cells[3].innerHTML && cells[3].innerHTML === cells[6].innerHTML) {
-    showWinner(cells[0].innerHTML);
-    return true;
-  }
-  else if (cells[1].innerHTML !== "" && cells[1].innerHTML === cells[4].innerHTML && cells[4].innerHTML === cells[7].innerHTML) {
-    showWinner(cells[1].innerHTML);
-    return true;
-  }
-  else if (cells[2].innerHTML !== "" && cells[2].innerHTML === cells[5].innerHTML && cells[5].innerHTML === cells[8].innerHTML) {
-    showWinner(cells[2].innerHTML);
-    return true;
-  }
-  else if (cells[0].innerHTML !== "" && cells[0].innerHTML === cells[4].innerHTML && cells[4].innerHTML === cells[8].innerHTML) {
-    showWinner(cells[0].innerHTML);
-    return true;
-  }
-  else if (cells[2].innerHTML !== "" && cells[2].innerHTML === cells[4].innerHTML && cells[4].innerHTML === cells[6].innerHTML) {
-    showWinner(cells[2].innerHTML);
-    return true;
-  }
-  else return false;
-}
+    this.playerMove = function(cell) {
+      $(cell).text(this.currentPlayer);
+      if(!this.checkFinish()) this.swapCurrentPlayer();
+    }
 
-function getNameWinner(st) {
-  if(st === "X") return "Победили крестики(X)";
-  else return "Победили нолики(0)";
-}
-function showWinner(symbol) {
-  statusText.innerHTML = getNameWinner(symbol);
-  // alert(getNameWinner(symbol));
-}
-function clearBoard() {
-  for (var i = 0; i < cells.length; i++) {
-    cells[i].innerHTML = "";
+    this.checkFinish = function() {
+        if ($(this.cells[0]).text() !== "" && $(this.cells[0]).text() === $(this.cells[1]).text() 
+            && $(this.cells[0]).text() === $(this.cells[2]).text()) {
+          $(this.status).text("Winner " + this.currentPlayer);
+          this.stop = true;
+          return true;
+        }
+        if ($(this.cells[3]).text() !== "" && $(this.cells[3]).text() === $(this.cells[4]).text() 
+            && $(this.cells[3]).text() === $(this.cells[5]).text()) {
+          $(this.status).text("Winner " + this.currentPlayer);
+          this.stop = true;
+          return true;
+        }
+        if ($(this.cells[6]).text() !== "" && $(this.cells[6]).text() === $(this.cells[7]).text() 
+            && $(this.cells[6]).text() === $(this.cells[8]).text()) {
+          $(this.status).text("Winner " + this.currentPlayer);
+          this.stop = true;
+          return true;
+        }
+        if ($(this.cells[0]).text() !== "" && $(this.cells[0]).text() === $(this.cells[3]).text() 
+            && $(this.cells[0]).text() === $(this.cells[6]).text()) {
+          $(this.status).text("Winner " + this.currentPlayer);
+          this.stop = true;
+          return true;
+        }
+        if ($(this.cells[1]).text() !== "" && $(this.cells[1]).text() === $(this.cells[4]).text() 
+            && $(this.cells[1]).text() === $(this.cells[7]).text()) {
+          $(this.status).text("Winner " + this.currentPlayer);
+          this.stop = true;
+          return true;
+        }
+        if ($(this.cells[2]).text() !== "" && $(this.cells[2]).text() === $(this.cells[5]).text() 
+            && $(this.cells[2]).text() === $(this.cells[8]).text()) {
+          $(this.status).text("Winner " + this.currentPlayer);
+          this.stop = true;
+          return true;
+        }
+        if ($(this.cells[0]).text() !== "" && $(this.cells[0]).text() === $(this.cells[4]).text() 
+            && $(this.cells[0]).text() === $(this.cells[8]).text()) {
+          $(this.status).text("Winner " + this.currentPlayer);
+          this.stop = true;
+          return true;
+        }
+        if ($(this.cells[2]).text() !== "" && $(this.cells[2]).text() === $(this.cells[4]).text() 
+            && $(this.cells[2]).text() === $(this.cells[6]).text()) {
+          $(this.status).text("Winner " + this.currentPlayer);
+          this.stop = true;
+          return true;
+        }
+
+        var count = 0;
+        for (var i = 0; i < this.cells.length; i++) {
+          if ($(this.cells[i]).text() !== "") count++;
+        }
+        if (count === 9) {
+          $(this.status).text("Draw");
+          return true;
+        }
+        return false;
+    }
+
+    this.swapCurrentPlayer = function() {
+      if (this.currentPlayer === this.playerMarker1) {
+        this.currentPlayer = this.playerMarker2;
+      }
+      else this.currentPlayer = this.playerMarker1;
+      $(this.status).text("Turn " + this.currentPlayer);
+    }
+
+    this.reset = function() {
+      for (var i = 0; i < this.cells.length; i++) {
+        $(this.cells[i]).text("");
+      }
+      this.currentPlayer = this.playerMarker1;
+      $(this.status).text("Turn X");
+      this.stop = false;
+    }
+
+
   }
-  statusText.innerHTML = "Ход крестиков(X)";
-  turnTic = true;
-  firstTurn = true;
-}
+
+  var game = new Game();
+
+  $(".cell").click(function() {
+    game.selectCell($(this));
+  });
+
+  $(".btn-reset").click(function() {
+    game.reset();
+  })
+
+
+
+})

@@ -61,4 +61,3 @@
 
   window.Q = Q;
 })();
-console.log("sdf");

@@ -12,4 +12,30 @@
 
     }
   }
+  .slide-nav {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    button {
+      color: white;
+      font-size: 30px;
+      background-color: rgba(0,0,0,0.5);
+      border: 0;
+      position: absolute;
+      top: 0;
+      width: 30px;
+      height: 100%;
+      outline: 0;
+      &:hover {
+        background-color: rgba(0,0,0,0.8);
+      }
+    }
+    .prev {
+      left: 0;
+    }
+    .next {
+      right: 0;
+    }
+  }
 }
